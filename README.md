@@ -68,3 +68,28 @@ incident in the log layer without needing to be redirected to a SIEM team.
 **ITIL 4 alignment:**
 Every runbook has P1-P3 priority classifications with SLA targets, escalation
 criteria, and a structured escalation package template that L2 can act on immediately.
+
+
+---
+
+## How to use this runbook
+
+```bash
+# Clone
+git clone https://github.com/YOUR-USERNAME/azure-l1-support-runbook.git
+cd azure-l1-support-runbook
+
+# Start with the most common ticket type
+cat 01-vm-troubleshooting.md
+
+# Reference error codes during any investigation
+cat 08-common-azure-error-codes.md
+
+# Copy KQL queries directly into Azure Log Analytics
+cat 07-kql-quick-reference.md
+
+# Use the escalation template before every L2 escalation
+cat docs/escalation-package-template.md
+```
+
+---
