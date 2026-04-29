@@ -56,3 +56,7 @@ escalation with a complete package. Every procedure follows this structure.
 - Storage account RBAC roles vs data plane roles - why Contributor does not grant blob access
 - NSG subnet vs NIC level - why both are checked in Effective Security Rules
 - App Service vs App Service Plan - why the plan health affects all apps on it
+
+**KQL investigation:**
+25+ tested queries covering every runbook scenario - analysts can investigate any
+incident in the log layer without needing to be redirected to a SIEM team.
