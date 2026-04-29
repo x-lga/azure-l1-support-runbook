@@ -42,3 +42,11 @@ is designed to be followed in real time during an incident - not just read as th
 | Manage Azure Governance (15-20%) | Cost management (Runbook 06): Cost Analysis, orphaned resources, budgets, quotas, tagging; Error codes (Runbook 08): policy and RBAC errors |
 
 ---
+
+## Skills demonstrated
+
+**Azure troubleshooting methodology:**
+Systematic triage starting with portal status → Activity Log → Resource Health →
+specific diagnostic tools (Boot Diagnostics, Serial Console, IP Flow Verify) →
+escalation with a complete package. Every procedure follows this structure.
+
