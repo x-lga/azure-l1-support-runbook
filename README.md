@@ -93,3 +93,19 @@ cat docs/escalation-package-template.md
 ```
 
 ---
+
+## Impact
+
+This runbook operationalises AZ-104 knowledge into real support procedures. The
+distinction between Restart and Stop/Deallocate+Start is not just an exam question —
+it is the difference between a resolved AllocationFailed ticket and 30 wasted minutes
+of trial-and-error. The Entra ID synced vs cloud-only account distinction prevents the
+frustrating cycle of making a change in the portal and watching it revert 30 minutes
+later. The KQL reference turns every investigation from "wait for the SIEM team" into
+"run this query now."
+
+These are the operational details that textbooks do not emphasise but that every
+cloud support engineer encounters in their first week.
+
+
+---
