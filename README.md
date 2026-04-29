@@ -64,3 +64,7 @@ incident in the log layer without needing to be redirected to a SIEM team.
 **Error code fluency:**
 20 error codes with plain-language explanations and L1 actions - eliminates the
 "what does this mean?" delay and communicates clearly to non-technical stakeholders.
+
+**ITIL 4 alignment:**
+Every runbook has P1-P3 priority classifications with SLA targets, escalation
+criteria, and a structured escalation package template that L2 can act on immediately.
