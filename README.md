@@ -11,3 +11,21 @@ Built from AZ-104 training and hands-on Azure hybrid lab experience. Every proce
 is designed to be followed in real time during an incident - not just read as theory.
 
 ---
+
+## What this repo contains
+
+| File | Purpose | Who uses it |
+|------|---------|-------------|
+| `01-vm-troubleshooting.md` | VM start failures, power states (Restart vs Stop/Start distinction), Activity Log, Resource Health, Boot Diagnostics, Serial Console, NSG/JIT access, performance degradation with KQL | Azure cloud support L1, operations engineers |
+| `02-entra-id-user-management.md` | Cloud-only vs synced account distinction, password reset for both types, enable/disable, session revoke, MFA reset, sign-in failure investigation with error codes, bulk user report, guest user B2B management | IT support, IAM teams, cloud admins |
+| `03-nsg-and-network-diagnostics.md` | IP Flow Verify, Effective Security Rules, NSG rule addition with priority guidance, Connection Troubleshoot, NSG Flow Log queries, Azure DNS troubleshooting for hybrid environments | Network-aware L1, cloud support engineers |
+| `04-app-service-recovery.md` | App Service vs App Service Plan distinction, HTTP 502/503/504 triage, restart vs stop/start, application logs, Log Analytics app log queries, deployment slot swap for rollback, SSL certificate issues, Kudu console | Cloud support, web application operations |
+| `05-storage-and-access-issues.md` | 403 AuthorizationFailure diagnosis (RBAC vs firewall vs access keys vs SAS), 404 BlobNotFound, Azure Files mounting errors (port 445, SMB persistence), Archive rehydration, Lifecycle Management, storage cost optimisation | Cloud support, application support engineers |
+| `06-cost-and-subscription-management.md` | Cost Analysis investigation, orphaned resource cleanup checklist, budget alert setup, quota errors and increase requests, resource tagging for cost attribution, Azure Advisor cost recommendations | Cloud admins, FinOps practitioners, anyone managing Azure spend |
+| `07-kql-quick-reference.md` | 25+ tested KQL queries covering VM performance, security events (4625/4624/4740/4720/4672), Azure Activity Log, Entra ID sign-in analysis, App Service HTTP errors, Storage authentication failures, plus KQL operator reference | Any Azure engineer using Log Analytics |
+| `08-common-azure-error-codes.md` | 20 error codes across Compute, Networking, Identity, Storage, and App Service - each with plain-language explanation, root cause, and L1 action | L1 support engineers, AZ-104 exam prep |
+| `docs/azure-portal-navigation-guide.md` | Navigation paths for every common portal blade, Azure search usage, Cloud Shell commands | L1 engineers new to Azure Portal |
+| `docs/escalation-package-template.md` | Complete L2 escalation template, guidance on when to open Microsoft support tickets directly, severity levels and response times | All L1 engineers |
+| `docs/azure-support-tiers-reference.md` | Microsoft support plan comparison, Azure Status page URLs, escalation decision tree | L1 engineers communicating support timelines |
+
+---
