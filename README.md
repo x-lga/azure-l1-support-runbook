@@ -29,3 +29,16 @@ is designed to be followed in real time during an incident - not just read as th
 | `docs/azure-support-tiers-reference.md` | Microsoft support plan comparison, Azure Status page URLs, escalation decision tree | L1 engineers communicating support timelines |
 
 ---
+
+## AZ-104 Exam Domains Mapped to This Runbook
+
+| AZ-104 Domain | Coverage in This Runbook |
+|--------------|------------------------|
+| Manage Azure Identities (20-25%) | Entra ID user management (Runbook 02): cloud vs synced accounts, password reset, session revoke, MFA reset, sign-in log investigation |
+| Implement and Manage Virtual Networking (15-20%) | NSG diagnostics (Runbook 03): IP Flow Verify, Effective Security Rules, Connection Troubleshoot, NSG Flow Logs, DNS troubleshooting |
+| Deploy and Manage Azure Compute (20-25%) | VM troubleshooting (Runbook 01): power states, Activity Log, Resource Health, Boot Diagnostics, Serial Console; App Service (Runbook 04) |
+| Implement and Manage Azure Storage (10-15%) | Storage access issues (Runbook 05): RBAC vs firewall vs keys vs SAS, 404 diagnosis, Azure Files mounting, Archive rehydration |
+| Monitor and Maintain Azure Resources (10-15%) | KQL reference (Runbook 07): 25+ queries across all resource types; performance investigation (Runbooks 01, 04) |
+| Manage Azure Governance (15-20%) | Cost management (Runbook 06): Cost Analysis, orphaned resources, budgets, quotas, tagging; Error codes (Runbook 08): policy and RBAC errors |
+
+---
