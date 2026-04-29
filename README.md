@@ -60,3 +60,7 @@ escalation with a complete package. Every procedure follows this structure.
 **KQL investigation:**
 25+ tested queries covering every runbook scenario - analysts can investigate any
 incident in the log layer without needing to be redirected to a SIEM team.
+
+**Error code fluency:**
+20 error codes with plain-language explanations and L1 actions - eliminates the
+"what does this mean?" delay and communicates clearly to non-technical stakeholders.
