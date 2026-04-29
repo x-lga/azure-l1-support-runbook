@@ -50,3 +50,9 @@ Systematic triage starting with portal status → Activity Log → Resource Heal
 specific diagnostic tools (Boot Diagnostics, Serial Console, IP Flow Verify) →
 escalation with a complete package. Every procedure follows this structure.
 
+**Critical Azure distinctions:**
+- Restart vs Stop (Deallocate) + Start - why they are different and when each matters
+- Cloud-only vs synced Entra ID accounts - why changes revert for synced accounts
+- Storage account RBAC roles vs data plane roles - why Contributor does not grant blob access
+- NSG subnet vs NIC level - why both are checked in Effective Security Rules
+- App Service vs App Service Plan - why the plan health affects all apps on it
