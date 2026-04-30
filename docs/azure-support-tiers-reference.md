@@ -5,3 +5,15 @@ with end users about Microsoft support timelines, and helps determine when to op
 a support case vs handle internally.
 
 ---
+
+## Microsoft Azure Support Plans
+
+| Plan | Cost | Severity A Response | Severity B Response | Best For |
+|------|------|--------------------|--------------------|---------|
+| Basic | Free (included with subscription) | No technical support | No technical support | Billing questions only |
+| Developer | ~$29/month | No 24/7 | 1 business day | Non-production environments |
+| Standard | ~$100/month | < 1 hour | < 4 hours | Production workloads |
+| Professional Direct | ~$1,000/month | < 1 hour | < 2 hours | Business-critical workloads |
+| Premier / Unified | Custom (enterprise) | < 15 minutes | < 1 hour | Large enterprise with dedicated TAM |
+
+---
