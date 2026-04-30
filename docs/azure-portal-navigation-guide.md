@@ -27,3 +27,12 @@ Azure Portal → Entra ID (Microsoft Entra ID)
   ├── Security          : Conditional Access, MFA, Risky users
   └── Monitoring        : Sign-in Logs, Audit Logs
 ```
+
+### Network Security Groups
+```
+Azure Portal → Network Security Groups → [NSG Name]
+  ├── Overview          : Associated subnets and NICs
+  ├── Inbound rules     : All inbound allow/deny rules
+  ├── Outbound rules    : All outbound allow/deny rules
+  └── Diagnostic        : NSG Flow Logs
+```
