@@ -46,3 +46,14 @@ Azure Portal → Network Watcher
   ├── NSG Diagnostics   : Check NSG rule evaluation for specific traffic
   └── Topology          : Visual network topology map
 ```
+### Log Analytics / Monitoring
+```
+Azure Portal → Log Analytics Workspaces → [Workspace] → Logs
+  → Write and run KQL queries
+
+Azure Portal → Monitor
+  ├── Metrics           : Real-time metric charts for any Azure resource
+  ├── Alerts            : Alert rules, fired alerts, action groups
+  ├── Activity Log      : Subscription-wide activity log
+  └── Workbooks         : Pre-built monitoring dashboards
+```
