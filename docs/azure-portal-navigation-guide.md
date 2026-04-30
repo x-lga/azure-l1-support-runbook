@@ -18,3 +18,12 @@ Azure Portal → Virtual Machines → [VM Name]
   ├── Help              : Resource Health, Boot Diagnostics, Serial Console
   └── Connect           : Bastion, RDP, SSH connection options
 ```
+### Entra ID
+```
+Azure Portal → Entra ID (Microsoft Entra ID)
+  ├── Users             : User accounts — manage, reset password, disable
+  ├── Groups            : Group membership and licensing
+  ├── Enterprise Apps   : Application access and permissions
+  ├── Security          : Conditional Access, MFA, Risky users
+  └── Monitoring        : Sign-in Logs, Audit Logs
+```
