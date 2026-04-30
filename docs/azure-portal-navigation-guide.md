@@ -36,3 +36,13 @@ Azure Portal → Network Security Groups → [NSG Name]
   ├── Outbound rules    : All outbound allow/deny rules
   └── Diagnostic        : NSG Flow Logs
 ```
+
+### Network Watcher
+```
+Azure Portal → Network Watcher
+  ├── IP Flow Verify    : "Is this traffic allowed by NSG rules?"
+  ├── Connection Troubleshoot : "Can this VM reach this destination?"
+  ├── Packet Capture    : Capture raw network packets from a VM NIC
+  ├── NSG Diagnostics   : Check NSG rule evaluation for specific traffic
+  └── Topology          : Visual network topology map
+```
