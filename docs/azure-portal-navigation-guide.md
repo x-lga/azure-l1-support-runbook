@@ -83,3 +83,36 @@ The portal search also finds documentation and marketplace items - use it first
 before navigating through the left menu.
 
 ---
+
+## Azure Cloud Shell - When Portal Clicks Are Not Enough
+
+The Azure Cloud Shell provides a browser-based PowerShell or Bash terminal with
+the Azure CLI and Azure PowerShell pre-installed. No installation required.
+
+```
+Azure Portal → Cloud Shell icon (>_ ) in the top toolbar
+  → Choose: PowerShell or Bash
+  → Authenticate is automatic - uses your portal session credentials
+```
+
+Common uses:
+```powershell
+# List all VMs in a subscription
+Get-AzVM | Select-Object Name, ResourceGroupName, Location, PowerState
+
+# Check a VM's current size
+(Get-AzVM -Name vm-win-server -ResourceGroupName rg-hybrid-lab).HardwareProfile.VmSize
+
+# List all role assignments in a resource group
+Get-AzRoleAssignment -ResourceGroupName rg-hybrid-lab | Select-Object DisplayName, RoleDefinitionName, Scope
+```
+
+```bash
+# Azure CLI equivalents
+az vm list --output table
+az vm show -n vm-win-server -g rg-hybrid-lab --query hardwareProfile.vmSize
+az role assignment list --resource-group rg-hybrid-lab --output table
+```
+
+
+---
