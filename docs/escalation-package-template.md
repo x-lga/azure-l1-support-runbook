@@ -57,3 +57,41 @@ BUSINESS IMPACT:
 ```
 
 ---
+
+## Azure Support Request - When to Open with Microsoft
+
+Open a support request directly with Microsoft when:
+- Azure Resource Health shows platform-initiated unavailability persisting > 30 minutes
+- Error is `InternalServerError` and persists despite Stop (Deallocate) + Start
+- A quota increase is required and cannot wait for the standard request process
+- Data loss or corruption has occurred and recovery support is needed
+
+```
+Azure Portal → Help + Support → + Create a support request
+
+Support Type    : Technical
+Service         : [Select the affected Azure service]
+Issue type      : [Select the issue category]
+Subscription    : [Affected subscription]
+Problem type    : [Most specific match available]
+Problem subtype : [Most specific match available]
+Severity        :
+  A — Critical  : Production service completely down, no workaround
+  B — High      : Production degraded, workaround exists
+  C — Minimal   : Non-production or minor issue
+
+Include in the description:
+  - Resource ID of the affected resource
+  - Full Activity Log error message
+  - Steps already attempted
+  - Timeline of when the issue started
+  - Business impact
+```
+
+Microsoft support response times (paid support plans):
+- Severity A: < 1 hour initial response
+- Severity B: < 4 hours initial response
+- Severity C: < 8 business hours initial response
+
+
+---
