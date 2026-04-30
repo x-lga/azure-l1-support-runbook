@@ -76,9 +76,9 @@ Subscription    : [Affected subscription]
 Problem type    : [Most specific match available]
 Problem subtype : [Most specific match available]
 Severity        :
-  A — Critical  : Production service completely down, no workaround
-  B — High      : Production degraded, workaround exists
-  C — Minimal   : Non-production or minor issue
+  A - Critical  : Production service completely down, no workaround
+  B - High      : Production degraded, workaround exists
+  C - Minimal   : Non-production or minor issue
 
 Include in the description:
   - Resource ID of the affected resource
