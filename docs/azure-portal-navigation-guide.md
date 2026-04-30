@@ -67,3 +67,19 @@ Azure Portal → Cost Management + Billing
 ```
 
 ---
+
+## Azure Portal Search - Fastest Navigation Method
+
+Press `/` or click the search bar at the top of the Azure Portal.
+Type a resource name, resource type, or Azure service name to jump directly to it.
+
+Examples:
+- Type `vm-win-server` → jumps to the VM resource
+- Type `Virtual Machines` → shows all VMs in the subscription
+- Type `Network Watcher` → opens Network Watcher directly
+- Type `Cost Analysis` → opens the Cost Analysis blade
+
+The portal search also finds documentation and marketplace items - use it first
+before navigating through the left menu.
+
+---
