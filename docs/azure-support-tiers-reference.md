@@ -17,3 +17,14 @@ a support case vs handle internally.
 | Premier / Unified | Custom (enterprise) | < 15 minutes | < 1 hour | Large enterprise with dedicated TAM |
 
 ---
+
+## Azure Status Pages - Quick Reference
+
+| Resource | URL | Purpose |
+|---------|-----|---------|
+| Azure Status (global) | azure.status.microsoft.com | Current and historical platform incidents by region and service |
+| Azure Service Health | Portal → Service Health | Incidents, planned maintenance, and health advisories specific to YOUR subscription |
+| Microsoft 365 Status | status.office365.com | M365 service health (separate from Azure) |
+| Microsoft Defender | security.microsoft.com → Service health | Defender for Endpoint/Cloud service status |
+
+---
