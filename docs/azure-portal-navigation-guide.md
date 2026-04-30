@@ -57,3 +57,13 @@ Azure Portal → Monitor
   ├── Activity Log      : Subscription-wide activity log
   └── Workbooks         : Pre-built monitoring dashboards
 ```
+
+### Cost Management
+```
+Azure Portal → Cost Management + Billing
+  ├── Cost Management → Cost Analysis : Spending by service/resource/time
+  ├── Cost Management → Budgets       : Budget alerts and thresholds
+  └── Billing → Invoices              : Monthly invoice history
+```
+
+---
