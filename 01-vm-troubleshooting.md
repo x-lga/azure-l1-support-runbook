@@ -65,7 +65,7 @@ what is wrong.
 
 ### Step 2 - Check the Activity Log
 
-The Activity Log records every control-plane operation on the VM — starts, stops,
+The Activity Log records every control-plane operation on the VM - starts, stops,
 restarts, configuration changes, and failures. It is the most reliable source of
 the exact error that caused the failure.
 
@@ -100,7 +100,7 @@ This tells you exactly what is wrong and points you to the correct resolution
 
 ### Step 3 - Check Resource Health
 
-Resource Health tells you whether Azure's own infrastructure is causing the issue —
+Resource Health tells you whether Azure's own infrastructure is causing the issue -
 separate from any configuration problem on your VM.
 
 ```
