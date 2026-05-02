@@ -121,4 +121,35 @@ If it persists beyond 30 minutes, open an Azure support request with Microsoft.
 
 ---
 
+### Step 4 - Attempt a Restart via the Portal
+
+A portal restart is different from an OS-level restart. The portal restart
+deallocates the VM and reallocates it on the same host cluster. This resolves
+transient host issues without moving the VM to a new cluster.
+
+```
+Azure Portal → Virtual Machines → [VM Name] → Overview → Restart
+```
+
+Wait 3–5 minutes. Check Status again after restart.
+
+If restart fails with **AllocationFailed:**
+
+```
+Azure Portal → VM → Overview → Stop
+  → Select "Stop (Deallocate)" when prompted
+  → Wait 2–3 minutes for VM to fully deallocate
+Azure Portal → VM → Overview → Start
+```
+
+**Why Stop → Start resolves AllocationFailed:**
+Restart keeps the VM on the same physical host cluster. If that cluster has no
+capacity for your VM size, the restart fails. Stop (Deallocate) releases the VM
+from that cluster entirely. The subsequent Start places it on any available cluster
+in the region - which may have capacity.
+
+This is one of the most important VM troubleshooting distinctions and is tested
+in the AZ-104 exam. Restart ≠ Stop + Start.
+
+---
 
