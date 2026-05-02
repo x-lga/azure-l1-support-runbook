@@ -63,3 +63,38 @@ what is wrong.
 
 ---
 
+### Step 2 - Check the Activity Log
+
+The Activity Log records every control-plane operation on the VM — starts, stops,
+restarts, configuration changes, and failures. It is the most reliable source of
+the exact error that caused the failure.
+
+```
+Azure Portal → Virtual Machines → [VM Name] → Activity Log
+
+Filter:
+  Time range : Last 1 hour (extend to 24 hours if issue is not recent)
+  Level      : Error (to find failures immediately)
+
+Click any failed operation (shown with a red X) to expand:
+  → Status    : The top-level result (Failed)
+  → Status message : The detailed error including the specific error code
+```
+
+**Example Activity Log entry for AllocationFailed:**
+```json
+{
+  "status": "Failed",
+  "error": {
+    "code": "AllocationFailed",
+    "message": "Allocation failed. We do not have sufficient capacity
+                for the requested VM size in this region."
+  }
+}
+```
+
+This tells you exactly what is wrong and points you to the correct resolution
+(deallocate and restart to move to a different host cluster).
+
+---
+
