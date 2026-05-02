@@ -273,3 +273,41 @@ removed when the time expires.
 
 ---
 
+### Step 9 - Escalation Package
+
+When escalating a VM issue, provide L2 with all of the following:
+
+```
+VM INCIDENT ESCALATION PACKAGE
+══════════════════════════════════════════════════════
+VM Name          :
+VM Resource ID   : (Azure Portal → VM → Overview → Properties → Resource ID)
+VM Size          :
+Region           :
+Resource Group   :
+──────────────────────────────────────────────────────
+Current Status   : [Portal status field]
+Resource Health  : [Available / Unavailable Platform / Unavailable User / Degraded]
+──────────────────────────────────────────────────────
+Activity Log:
+  Most recent failed operation :
+  Error code                   :
+  Full error message           :
+  Time of failure              :
+──────────────────────────────────────────────────────
+Boot Diagnostics screenshot description:
+  [Describe what is visible on the screenshot]
+──────────────────────────────────────────────────────
+Steps taken and results:
+  [HH:MM] Portal restart attempted — result:
+  [HH:MM] Stop (Deallocate) + Start attempted — result:
+  [HH:MM] NSG rules checked — result:
+  [HH:MM] Serial Console accessed — result:
+──────────────────────────────────────────────────────
+Business impact:
+  [What service or workload is unavailable and since when]
+══════════════════════════════════════════════════════
+```
+
+---
+
