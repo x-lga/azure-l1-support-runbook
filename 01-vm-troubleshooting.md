@@ -252,3 +252,24 @@ that rule is blocking your connection. Update the NSG rule to allow your IP.
 
 ---
 
+### Step 8 - Check JIT (Just-In-Time) Access
+
+If Microsoft Defender for Cloud is enabled on the subscription and JIT VM access
+is configured, RDP/SSH ports may be closed by default and only opened on request.
+
+```
+Azure Portal → Virtual Machines → [VM Name] → Configuration →
+  Just-in-time access
+
+OR
+
+Azure Portal → Microsoft Defender for Cloud → Workload Protections →
+  Just-in-time VM access → Configured VMs → [VM Name]
+```
+
+If JIT is enabled: request access by clicking "Request access" and filling in
+your source IP and the duration. The NSG rule will be created automatically and
+removed when the time expires.
+
+---
+
