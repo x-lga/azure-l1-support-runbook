@@ -29,3 +29,8 @@ this in a support ticket as "I stopped the VM but I'm still being charged."
 
 ---
 
+## Procedure A - VM Will Not Start
+
+This is the most common VM support ticket. The user cannot connect to the VM or the
+VM shows as Failed, Stopped, or in an error state.
+
