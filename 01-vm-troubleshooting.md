@@ -311,3 +311,41 @@ Business impact:
 
 ---
 
+## Procedure B - VM Running But Performance Is Degraded
+
+### Check Azure Monitor Metrics via Portal
+
+```
+Azure Portal → Virtual Machines → [VM Name] → Monitoring → Metrics
+
+Add the following metrics to the chart:
+  Percentage CPU        - sustained >80% = CPU saturation
+  Available Memory Bytes - low value = memory pressure
+  OS Disk Queue Depth   - >5 sustained = disk I/O bottleneck
+  Network In Total      - unusual spike = unexpected traffic
+  Network Out Total     - unusual spike = potential data transfer issue
+```
+
+### Check Guest OS Performance (requires Azure Monitor Agent or Diagnostics)
+
+```kql
+// CPU utilisation over the last hour
+Perf
+| where TimeGenerated > ago(1h)
+| where Computer == "vm-win-server"
+    and ObjectName == "Processor"
+    and CounterName == "% Processor Time"
+    and InstanceName == "_Total"
+| summarize AvgCPU = avg(CounterValue) by bin(TimeGenerated, 5m)
+| render timechart
+
+// Memory available
+Perf
+| where TimeGenerated > ago(1h)
+| where Computer == "vm-win-server"
+    and ObjectName == "Memory"
+    and CounterName == "Available MBytes"
+| summarize AvgMem = avg(CounterValue) by bin(TimeGenerated, 5m)
+| render timechart
+```
+
