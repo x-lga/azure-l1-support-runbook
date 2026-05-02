@@ -153,3 +153,30 @@ in the AZ-104 exam. Restart ≠ Stop + Start.
 
 ---
 
+### Step 5 - Check Boot Diagnostics (VM Starts But OS Does Not Respond)
+
+If the VM shows as Running in the portal but you cannot connect to it (RDP/SSH
+times out, connection refused), the issue may be in the guest OS — the VM is
+powered on but the OS has crashed, is in a boot loop, or has a configuration issue.
+
+```
+Azure Portal → Virtual Machines → [VM Name] → Help → Boot Diagnostics
+  → View Screenshot
+
+The screenshot shows the last console output of the VM.
+```
+
+**What the boot diagnostics screenshot tells you:**
+
+| Screenshot Shows | Likely Cause | L1 Action |
+|-----------------|-------------|-----------|
+| Windows login screen | OS is healthy - connectivity or firewall issue | Check NSG rules, RDP settings |
+| Windows blue screen (BSOD) | OS crash - often caused by driver or update issue | Note the stop code, escalate to L2 |
+| "Preparing Automatic Repair" loop | Windows Update or filesystem issue | Escalate to L2 - may need disk repair |
+| Black screen | OS not starting - possible disk, boot, or driver issue | Escalate to L2 |
+| GRUB boot menu (Linux) | Linux boot issue | Escalate to L2 |
+| "BOOTMGR is missing" | Boot sector issue | Escalate to L2 |
+| Nothing / connection timeout | VM may still be starting - wait 3–5 minutes | Retry after waiting |
+
+---
+
