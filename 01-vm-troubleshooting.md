@@ -349,3 +349,16 @@ Perf
 | render timechart
 ```
 
+### Common Performance Causes and L1 Actions
+
+| Symptom | Likely Cause | L1 Action |
+|---------|-------------|-----------|
+| CPU consistently >90% | Runaway process, insufficient VM size | Check Task Manager via Bastion/Serial Console. Document top process. Escalate if unclear. |
+| Memory exhausted | Application memory leak, insufficient RAM | Check memory usage by process. Document. Escalate for VM resize evaluation. |
+| Disk I/O >100% | Failing disk, application writing too aggressively, antivirus scan | Check disk health via Boot Diagnostics. Escalate for disk diagnostics. |
+| Network spikes | Backup job, large file transfer, misconfigured application | Check Network In/Out metrics for pattern. Correlate with scheduled jobs. |
+| Consistent degradation since update | Windows Update, application update | Check Activity Log for recent operations. Roll back if safe to do so. |
+
+
+---
+
