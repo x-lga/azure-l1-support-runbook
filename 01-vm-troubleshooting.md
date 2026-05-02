@@ -223,3 +223,32 @@ sudo iptables -L INPUT
 
 ---
 
+### Step 7 - Check NSG Rules (VM Running But Cannot Connect)
+
+If the VM shows as Running, Boot Diagnostics shows a healthy OS, but RDP/SSH
+connections are refused - the likely cause is NSG rules blocking the traffic.
+
+```
+Azure Portal → Virtual Machines → [VM Name] → Networking
+  → Look at the inbound port rules section
+  → Check whether port 3389 (RDP) or 22 (SSH) has an Allow rule
+
+Better: Use Effective Security Rules for the complete picture:
+Azure Portal → VM → Networking → [NIC name] → Effective Security Rules
+
+OR use IP Flow Verify:
+Azure Portal → Network Watcher → IP Flow Verify
+  VM                 : [VM name]
+  Direction          : Inbound
+  Protocol           : TCP
+  Local IP           : [VM private IP]
+  Local port         : 3389
+  Remote IP          : [your IP trying to connect]
+  Remote port        : any (e.g., 54321)
+```
+
+If IP Flow Verify returns **Access denied** and names a specific NSG rule:
+that rule is blocking your connection. Update the NSG rule to allow your IP.
+
+---
+
