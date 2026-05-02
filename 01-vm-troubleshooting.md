@@ -98,3 +98,27 @@ This tells you exactly what is wrong and points you to the correct resolution
 
 ---
 
+### Step 3 - Check Resource Health
+
+Resource Health tells you whether Azure's own infrastructure is causing the issue —
+separate from any configuration problem on your VM.
+
+```
+Azure Portal → Virtual Machines → [VM Name] → Help → Resource Health
+```
+
+| Resource Health Status | Meaning | L1 Action |
+|-----------------------|---------|-----------|
+| Available | No platform issue - investigate VM configuration | Continue triage |
+| Unavailable - Platform initiated | Azure infrastructure issue affecting this VM | Document, do not escalate to L2 - open Azure support ticket if persistent |
+| Unavailable - User initiated | A user action caused the unavailability | Check Activity Log for the user action |
+| Degraded | Performance issue - VM is running but underperforming | Check diagnostics, possibly escalate |
+| Unknown | Health status cannot be determined | Check again in 5 minutes; may be a transient state |
+
+If Resource Health shows **Platform initiated unavailability**: this is Azure's
+problem, not yours. Document the Resource Health status and timestamp, and wait.
+If it persists beyond 30 minutes, open an Azure support request with Microsoft.
+
+---
+
+
