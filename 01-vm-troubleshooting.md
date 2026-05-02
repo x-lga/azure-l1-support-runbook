@@ -180,3 +180,46 @@ The screenshot shows the last console output of the VM.
 
 ---
 
+### Step 6 - Check Serial Console (Direct OS Access Without Network)
+
+The Serial Console provides a direct terminal connection to the VM through the
+Azure management plane - bypassing the network entirely. This is invaluable when
+the VM is running but network connectivity is broken (NSG misconfiguration, OS
+firewall, RDP service stopped).
+
+```
+Azure Portal → Virtual Machines → [VM Name] → Help → Serial Console
+```
+
+For this to work:
+- Boot diagnostics must be enabled on the VM
+- The VM must be running (even if unreachable by network)
+
+**Windows Serial Console:**
+The Windows SAC (Special Administration Console) provides basic access:
+```
+SAC> cmd                         # Opens a command prompt channel
+SAC> ch -si 1                    # Switch to channel 1
+C:\> netsh advfirewall show allprofiles state    # Check Windows Firewall
+C:\> net start TermService       # Start RDP service if stopped
+C:\> ipconfig /all               # Confirm IP configuration
+```
+
+**Linux Serial Console:**
+Provides direct bash prompt on the VM:
+```bash
+# Check network configuration
+ip addr show
+ip route show
+
+# Check SSH service
+systemctl status sshd
+systemctl start sshd
+
+# Check OS firewall
+sudo ufw status
+sudo iptables -L INPUT
+```
+
+---
+
