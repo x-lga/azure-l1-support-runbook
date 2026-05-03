@@ -124,4 +124,34 @@ naturally. For immediate lockout, disable the account.
 
 ---
 
+## Procedure D - Reset MFA for a User
+
+When a user has lost their phone, changed their phone number, or is reporting "MFA
+not working," their MFA methods need to be cleared so they can re-register.
+
+```
+Azure Portal → Entra ID → Users → [User Name] →
+  Authentication Methods →
+  Require Re-register MFA
+
+This clears all existing MFA registrations.
+The user will be prompted to set up new MFA on next sign-in.
+```
+
+**Before clearing MFA:**
+- Verify the user's identity through an alternative method
+  (manager confirmation, HR verification, video call with ID)
+- Confirm this is not a social engineering attempt to bypass MFA
+- Log the reason in the ticket
+
+**Alternative: Remove specific MFA methods:**
+```
+Azure Portal → Entra ID → Users → [User] →
+  Authentication Methods →
+  Delete the specific method (phone number, authenticator app) individually
+```
+
+---
+
+
 
