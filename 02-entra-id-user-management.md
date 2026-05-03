@@ -85,3 +85,16 @@ Update-MgUser -UserId "user@domain.com" -AccountEnabled:$false
 Write-Host "Account disabled: user@domain.com"
 ```
 
+### Enable (requires L2 authorisation for synced accounts):
+```
+Azure Portal → Entra ID → Users → [User] →
+  Edit Properties → Account Enabled: toggle to Yes → Save
+```
+
+**L1 rule:** Enabling a disabled account requires confirmation that the disablement
+was not intentional (offboarding, security hold). Always check with your manager
+or L2 before re-enabling any account. Never re-enable based solely on a user's
+request without verification.
+
+---
+
