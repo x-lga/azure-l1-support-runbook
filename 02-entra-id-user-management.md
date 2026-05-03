@@ -43,3 +43,28 @@ Azure Portal → Entra ID → Users → [User Name] →
 ```
 
 Copy the temporary password. Communicate to the user via phone or secure channel.
+
+### For Synced Accounts:
+Password must be reset on the **on-premises Active Directory** domain controller.
+```powershell
+# Run on the on-premises DC
+.\Reset-ADUserPassword.ps1 -Username <samaccountname>
+# Or manually:
+Set-ADAccountPassword -Identity <username> `
+    -NewPassword (Read-Host "New password" -AsSecureString) -Reset
+Set-ADUser -Identity <username> -ChangePasswordAtLogon $true
+```
+
+After the on-premises reset, the password hash is synced to Entra ID within
+30 minutes (or force a sync: `Start-ADSyncSyncCycle -PolicyType Delta`).
+
+If the user needs access immediately:
+```
+Azure Portal → Entra ID → Users → [User] →
+  Reset Password → use "Auto-generate password"
+```
+This resets the cloud password directly and bypasses the sync for immediate access.
+Note that the next sync will not overwrite this — it only writes the on-prem hash
+if the on-prem password changes.
+
+---
