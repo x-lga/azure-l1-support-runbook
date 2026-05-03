@@ -197,4 +197,45 @@ Azure Portal → Entra ID → Monitoring & Health → Sign-in Logs →
 ---
 
 
+## Procedure F - Bulk User Report for Audit
+
+When management or compliance requires a list of all users, their status, and last
+sign-in date for an access review:
+
+```
+Azure Portal → Entra ID → Users →
+  Download Users →
+  Download all users as CSV
+
+This exports:
+  - Display name, UPN, account status (enabled/disabled)
+  - Last sign-in date, creation date
+  - Assigned licences
+  - Department, job title
+  - Sync source (cloud vs on-prem AD)
+```
+
+**Query via Log Analytics for deeper audit data:**
+```kql
+// Users who have not signed in for 90+ days
+SigninLogs
+| where TimeGenerated > ago(90d)
+| summarize LastSignIn = max(TimeGenerated) by UserPrincipalName
+| where LastSignIn < ago(90d) OR isnull(LastSignIn)
+| project UserPrincipalName, LastSignIn
+| order by LastSignIn asc
+
+// Sign-in activity by country in the last 30 days
+SigninLogs
+| where TimeGenerated > ago(30d)
+| where ResultType == 0
+| summarize SignInCount = count() by
+    UserPrincipalName,
+    Location = tostring(LocationDetails.countryOrRegion)
+| order by SignInCount desc
+```
+
+---
+
+
 
