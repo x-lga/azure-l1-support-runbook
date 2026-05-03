@@ -68,3 +68,11 @@ Note that the next sync will not overwrite this — it only writes the on-prem h
 if the on-prem password changes.
 
 ---
+
+## Procedure B — Enable or Disable an Account
+
+### Disable (Cloud-Only):
+```
+Azure Portal → Entra ID → Users → [User] →
+  Edit Properties → Account Enabled: toggle to No → Save
+```
