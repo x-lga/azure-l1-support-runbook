@@ -258,5 +258,42 @@ per-user licence assignment.
 
 ---
 
+## Procedure H - Guest User Management (B2B)
+
+When an external user (from another organisation) needs access to your Azure
+resources or M365 applications:
+
+**Invite a guest user:**
+```
+Azure Portal → Entra ID → Users → New User →
+  Invite External User →
+  Email address   : external.user@partner.com
+  Display name    : [First Last]
+  Message         : [Optional welcome message]
+  → Invite
+```
+
+The external user receives an invitation email. They must accept the invitation
+and authenticate with their own organisation's identity (or a Microsoft account).
+
+**Check guest user access:**
+```
+Azure Portal → Entra ID → Users →
+  Filter: User type = Guest
+```
+
+**Guest user security best practices:**
+- Review guest access regularly (quarterly at minimum)
+- Remove guest accounts when the collaboration ends
+- Use Access Reviews (Entra ID P2) to automate the review process
+- Restrict what guests can see by default:
+  ```
+  Entra ID → External Identities → External Collaboration Settings →
+    Guest user access : "Guest users have limited access..."
+  ```
+
+
+---
+
 
 
