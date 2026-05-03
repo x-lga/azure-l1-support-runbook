@@ -64,15 +64,24 @@ Azure Portal → Entra ID → Users → [User] →
   Reset Password → use "Auto-generate password"
 ```
 This resets the cloud password directly and bypasses the sync for immediate access.
-Note that the next sync will not overwrite this — it only writes the on-prem hash
+Note that the next sync will not overwrite this - it only writes the on-prem hash
 if the on-prem password changes.
 
 ---
 
-## Procedure B — Enable or Disable an Account
+## Procedure B - Enable or Disable an Account
 
 ### Disable (Cloud-Only):
 ```
 Azure Portal → Entra ID → Users → [User] →
   Edit Properties → Account Enabled: toggle to No → Save
 ```
+
+### Disable via PowerShell (Az module / Microsoft Graph):
+```powershell
+# Using Microsoft Graph PowerShell
+Connect-MgGraph -Scopes "User.ReadWrite.All"
+Update-MgUser -UserId "user@domain.com" -AccountEnabled:$false
+Write-Host "Account disabled: user@domain.com"
+```
+
