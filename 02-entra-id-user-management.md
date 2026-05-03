@@ -237,5 +237,26 @@ SigninLogs
 
 ---
 
+## Procedure G - Assign a Licence to a User
+
+```
+Azure Portal → Entra ID → Users → [User Name] →
+  Licences → Assignments → + Assign
+  Select the licence (e.g., Microsoft 365 E3)
+  Review service plans and disable any not needed
+  → Save
+```
+
+**Or via group-based licensing (preferred at scale):**
+```
+Azure Portal → Entra ID → Groups →
+  [Group name] → Licences → Assign
+```
+Group-based licensing automatically assigns the licence to all members of the group
+and removes it when they leave. This is more scalable and less error-prone than
+per-user licence assignment.
+
+---
+
 
 
