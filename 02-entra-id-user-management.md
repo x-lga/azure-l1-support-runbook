@@ -98,3 +98,30 @@ request without verification.
 
 ---
 
+## Procedure C - Revoke All Active Sessions (Compromised Account Response)
+
+When an account is suspected of compromise - phishing victim entered credentials,
+unusual sign-in activity, unknown device sign-in - revoke all active sessions
+immediately to kick the attacker out.
+
+```
+Azure Portal → Entra ID → Users → [User Name] →
+  Revoke Sessions
+
+This action:
+  - Signs the user out of all browser sessions (M365 web apps)
+  - Signs the user out of Outlook, Teams, OneDrive mobile and desktop apps
+  - Invalidates all access tokens (takes effect within ~1 hour as tokens expire)
+  - Does NOT disable the account (user can sign back in immediately)
+
+If account compromise is confirmed:
+  Do BOTH: Revoke Sessions AND Disable the account
+```
+
+**Important:** Revoking sessions invalidates refresh tokens but existing access
+tokens with short lifetimes (typically 1 hour) may still work until they expire
+naturally. For immediate lockout, disable the account.
+
+---
+
+
