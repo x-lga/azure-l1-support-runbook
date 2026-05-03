@@ -153,5 +153,48 @@ Azure Portal → Entra ID → Users → [User] →
 
 ---
 
+## Procedure E - Investigate Sign-In Failures
+
+When a user cannot sign in and the account is confirmed enabled and not locked,
+the Sign-In Logs reveal exactly why authentication is failing.
+
+```
+Azure Portal → Entra ID → Users → [User Name] →
+  Sign-In Logs
+
+  OR
+
+Azure Portal → Entra ID → Monitoring & Health → Sign-in Logs →
+  Filter by: User = [username] and Status = Failure
+```
+
+**Key fields to read in the sign-in log entry:**
+
+| Field | What to Check |
+|-------|--------------|
+| Status | Success / Failure |
+| Failure reason | The human-readable reason for failure |
+| Error code | The numeric code - reference against error code list |
+| Conditional Access | Which CA policies were evaluated and their result |
+| Client app | What application attempted the sign-in |
+| IP address | Geographic source - unusual location? |
+| Device | Which device attempted sign-in - known or unknown? |
+
+**Common sign-in failure reasons and L1 actions:**
+
+| Failure Reason | Code | L1 Action |
+|---------------|------|-----------|
+| Invalid password | 50126 | Password reset |
+| Account disabled | 50057 | Check if intentional - escalate for re-enable |
+| Account locked | 50053 | Unlock (on-prem via Unlock-ADUserAccount.ps1, or cloud via Portal) |
+| MFA required, not satisfied | 50076 | Guide user through MFA setup or reset MFA methods |
+| Conditional Access policy blocked | 53003 | Check which CA policy blocked - escalate if policy change needed |
+| User not found | 50034 | Wrong UPN - verify username, check for typo |
+| Token expired | 70008 | User needs to sign in again - usually auto-resolves |
+| Application not permitted | 65004 | App consent issue - escalate to admin |
+| AADSTS50105 | 50105 | User not assigned to the application - admin must assign user |
+
+---
+
 
 
