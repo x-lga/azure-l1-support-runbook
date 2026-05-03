@@ -30,3 +30,16 @@ This is one of the most common mistakes made by junior cloud admins: making a ch
 in Entra ID for a synced user and finding it reverted 30 minutes later.
 
 ---
+
+## Procedure A - Reset a User Password
+
+### For Cloud-Only Accounts:
+```
+Azure Portal → Entra ID → Users → [User Name] →
+  Reset Password →
+  Auto-generate password (recommended) or Set custom password →
+  User must change password on next sign-in: Yes →
+  Reset
+```
+
+Copy the temporary password. Communicate to the user via phone or secure channel.
