@@ -132,3 +132,25 @@ AppServiceConsoleLogs
 | project TimeGenerated, ResultDescription
 | order by TimeGenerated desc
 ```
+
+### Step 5 - Swap Deployment Slots (Rollback to Last Good Version)
+
+If the issue started after a recent deployment, rolling back to the previous
+version is often the fastest resolution.
+
+```
+Azure Portal → App Services → [App Name] →
+  Deployment Slots → Swap
+
+Source slot     : production
+Target slot     : staging (or the slot containing the last good version)
+
+This swaps the applications between the slots - the previous production version
+returns to the production slot immediately.
+```
+
+**Note:** Slot swaps are near-instantaneous (no downtime). The connection strings
+and app settings marked as "slot settings" stay with their respective slots and are
+not swapped.
+
+---
