@@ -23,3 +23,38 @@ subnet NSG is evaluated first, then NIC NSG. For outbound: NIC NSG first, then s
 This means even if the subnet NSG allows traffic, a NIC-level NSG can still block it.
 
 ---
+
+## Procedure A - Diagnose Connectivity Issues with IP Flow Verify
+
+IP Flow Verify is the fastest diagnostic for NSG-related connectivity issues.
+It answers the question: "Is Azure's NSG allowing or blocking this specific traffic?"
+without needing to send actual traffic.
+
+```
+Azure Portal → Network Watcher → IP Flow Verify
+
+  Subscription        : [your subscription]
+  Resource group      : [resource group containing the VM]
+  Virtual machine     : [target VM]
+  Network interface   : [auto-populated from VM selection]
+  Protocol            : TCP or UDP
+  Direction           : Inbound or Outbound
+  Local IP address    : [VM's private IP - e.g., 10.20.1.4]
+  Local port          : [target port - e.g., 3389 for RDP, 443 for HTTPS]
+  Remote IP address   : [source IP trying to connect - e.g., your public IP]
+  Remote port         : [source port - enter any random port, e.g., 54321]
+
+→ Click Check
+
+Result: "Access allowed" or "Access denied"
+If denied: the tool names the specific NSG rule causing the denial
+```
+
+**How to use the result:**
+- **Access allowed** but connection still fails: the NSG is not the problem.
+  Investigate the guest OS firewall (Windows Defender Firewall / UFW on Linux),
+  whether the service is running, or routing issues.
+- **Access denied** by a specific rule: review that rule and update if appropriate.
+  Document the rule name and NSG for the change record.
+
+---
