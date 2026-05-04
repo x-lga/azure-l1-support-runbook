@@ -25,3 +25,21 @@ ALL apps running on that plan are affected. When investigating a single app issu
 always check the App Service Plan health first.
 
 ---
+
+## Procedure A - App Service Not Responding (HTTP 502 / 503 / 504)
+
+### Step 1 - Check App Service Status
+
+```
+Azure Portal → App Services → [App Name] → Overview
+
+Check:
+  Status        : Running / Stopped
+  URL           : [your-app].azurewebsites.net - can you reach this in a browser?
+  HTTP 5xx errors in the metrics summary
+```
+
+**Start a stopped app:**
+```
+Azure Portal → App Services → [App Name] → Overview → Start
+```
