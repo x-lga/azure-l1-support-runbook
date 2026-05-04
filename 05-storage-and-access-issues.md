@@ -18,3 +18,8 @@
 | Azure Data Lake Storage Gen2 | Big data analytics - hierarchical namespace on Blob | REST API, Hadoop, Spark |
 
 ---
+
+## Procedure A - Storage Account Access Denied (403 Error)
+
+A 403 AuthorizationFailure or AuthorizationPermissionMismatch error means the
+request reached Azure Storage but was rejected due to insufficient permissions.
