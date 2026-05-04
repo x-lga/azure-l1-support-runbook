@@ -42,3 +42,33 @@ Verify the identity has one of:
 the resource group level does NOT grant access to read or write blob data.
 These roles manage the storage account configuration, not the data plane.
 For blob data access, you must use the Storage Blob Data roles.
+
+
+### Check 2 - Storage Account Firewall
+
+If the storage account has a firewall configured, only allowed IPs or VNets can
+access it. Applications accessing from an unexpected IP will get 403.
+
+```
+Azure Portal → Storage Accounts → [Account Name] →
+  Security + Networking → Networking
+
+Check:
+  Public network access:
+    "Enabled from all networks" : No firewall - anyone with credentials can access
+    "Enabled from selected virtual networks and IP addresses": Firewall active
+    "Disabled": All public access blocked - only Azure Private Endpoints
+
+If firewall is enabled:
+  Check that the application's source IP or VNet is in the allowed list
+  Check that "Allow Azure services on the trusted services list" is enabled
+  if an Azure service (VM, Function App, App Service) needs access
+```
+
+**Add a VNet to the storage firewall:**
+```
+Azure Portal → Storage Account → Networking → Firewalls and virtual networks →
+  Add existing virtual network →
+  [Select vnet-hybrid-lab and subnet-servers]
+  → Save
+```
