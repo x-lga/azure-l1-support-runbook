@@ -200,3 +200,38 @@ pointing to the App Service. If validation fails:
 ```
 
 ---
+
+## Procedure C - Application Settings and Environment Variables
+
+Many application failures are caused by incorrect or missing application settings
+(environment variables, connection strings). These are configured per App Service
+and per deployment slot.
+
+```
+Azure Portal → App Services → [App Name] →
+  Configuration → Application Settings
+
+Key things to check:
+  - Are required environment variables present?
+  - Are connection strings using the correct format and endpoint?
+  - Are any settings marked as "Slot settings" (they stay with this slot, not swapped)?
+  - After changing any setting: click Save, then Restart the app
+    (app settings are NOT applied without a restart)
+```
+
+**Retrieve settings via Azure CLI (for comparison or backup):**
+```bash
+# List all application settings (values masked by default)
+az webapp config appsettings list \
+    --name myapp \
+    --resource-group rg-hybrid-lab \
+    --output table
+
+# Show a specific setting value
+az webapp config appsettings list \
+    --name myapp \
+    --resource-group rg-hybrid-lab \
+    --query "[?name=='DATABASE_CONNECTION']"
+```
+
+---
