@@ -43,3 +43,31 @@ Check:
 ```
 Azure Portal → App Services → [App Name] → Overview → Start
 ```
+
+### Step 2 - Check the App Service Plan
+
+```
+Azure Portal → App Services → [App Name] →
+  App Service Plan → [Plan Name] → Overview
+
+Check:
+  CPU Percentage    : Sustained >80% = plan at CPU limit
+  Memory Percentage : Sustained >80% = plan at memory limit
+  HTTP Queue Length : Sustained >0 = requests queuing — plan cannot keep up
+```
+
+If the plan is at resource limits, the fix may be to scale up (larger instance)
+or scale out (more instances), not to restart the app.
+
+**Scale up the App Service Plan:**
+```
+Azure Portal → App Service Plan → Scale Up (App Service Plan)
+  Choose a higher tier (e.g., B2 → B3 → P1v3)
+```
+
+**Scale out (add more instances):**
+```
+Azure Portal → App Service Plan → Scale Out (App Service Plan)
+  Manual scale → Increase instance count
+  OR configure Autoscale rules
+```
