@@ -58,3 +58,36 @@ If denied: the tool names the specific NSG rule causing the denial
   Document the rule name and NSG for the change record.
 
 ---
+
+## Procedure B - Check Effective Security Rules
+
+Effective Security Rules shows the complete, merged view of all NSG rules applying
+to a specific VM's NIC - combining both the subnet-level NSG and the NIC-level NSG
+with all default rules included. This is the definitive view of what traffic is
+actually allowed or denied to a VM.
+
+```
+Azure Portal → Virtual Machines → [VM Name] →
+  Networking → [NIC name] → Effective Security Rules
+
+Shows two sections:
+  Inbound security rules  : All inbound rules, ordered by priority
+  Outbound security rules : All outbound rules, ordered by priority
+
+Each rule shows:
+  Priority | Name | Port | Protocol | Source | Destination | Action | Source NSG
+```
+
+**Key difference from viewing the NSG directly:**
+When you view the NSG directly, you only see the rules you created. Effective Security
+Rules shows ALL rules including the three default rules Azure adds to every NSG:
+- `AllowVnetInBound` (priority 65000) - allows all VNet-to-VNet traffic
+- `AllowAzureLoadBalancerInBound` (priority 65001) - allows Azure LB health probes
+- `DenyAllInBound` (priority 65500) - denies everything else not explicitly allowed
+
+And for outbound:
+- `AllowVnetOutBound` (priority 65000) - allows all VNet traffic outbound
+- `AllowInternetOutBound` (priority 65001) - allows all internet outbound
+- `DenyAllOutBound` (priority 65500) - denies all other outbound traffic
+
+---
