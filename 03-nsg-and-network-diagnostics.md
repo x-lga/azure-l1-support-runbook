@@ -130,7 +130,41 @@ Azure Portal → Network Security Groups → [NSG Name] →
 
 ---
 
+## Procedure D - Trace a Packet Path with Connection Troubleshoot
 
+Connection Troubleshoot tests end-to-end connectivity between two Azure resources
+or between an Azure resource and an external endpoint, identifying where in the
+path the issue is.
 
+```
+Azure Portal → Network Watcher → Connection Troubleshoot
+
+  Source:
+    Resource type      : Virtual Machine
+    Virtual machine    : vm-win-server
+
+  Destination:
+    Destination type   : IP address or FQDN
+    Destination        : 8.8.8.8 (or the target hostname/IP)
+
+  Protocol            : TCP
+  Destination port    : 443
+
+→ Check
+
+Results show:
+  Status       : Reachable / Unreachable
+  Hop count    : Number of hops in the path
+  Hops detail  : Each hop with latency and any issues detected
+```
+
+**Connection Troubleshoot vs IP Flow Verify:**
+- IP Flow Verify only checks NSG rules - it does not test actual connectivity
+- Connection Troubleshoot sends real test packets through the network path
+- Use IP Flow Verify for NSG-specific investigation
+- Use Connection Troubleshoot when you need to test full end-to-end path
+  including routing, firewalls, and the destination's responsiveness
+
+---
 
 
