@@ -154,3 +154,33 @@ and app settings marked as "slot settings" stay with their respective slots and 
 not swapped.
 
 ---
+
+## Procedure B - Custom Domain and SSL Certificate Issues
+
+### Certificate Expired or Not Binding Correctly
+
+```
+Azure Portal → App Services → [App Name] →
+  Certificates → Bring Your Own Certificates (.pfx)
+  OR
+  Managed Certificates (free App Service-issued certificates)
+
+Check:
+  Expiry date    : Is the certificate expired or expiring within 30 days?
+  Thumbprint     : Does it match the binding?
+  Status         : Active / Expired / Pending
+```
+
+**Renew a free App Service managed certificate:**
+```
+Azure Portal → App Services → [App Name] →
+  Certificates → Managed Certificates → [Certificate] → Renew
+```
+
+**Check the TLS binding:**
+```
+Azure Portal → App Services → [App Name] →
+  Custom Domains → [domain] →
+  SSL state: Secure / Not Secure
+  If Not Secure: check that the certificate thumbprint is bound to the domain
+```
