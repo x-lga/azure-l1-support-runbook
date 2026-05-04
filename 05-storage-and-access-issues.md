@@ -72,3 +72,38 @@ Azure Portal → Storage Account → Networking → Firewalls and virtual networ
   [Select vnet-hybrid-lab and subnet-servers]
   → Save
 ```
+
+### Check 3 - Storage Account Access Keys vs SAS Tokens vs Entra ID
+
+**Access Keys:**
+Storage accounts have two access keys (key1 and key2). Anyone with an access key
+has full access to all data. Access keys should only be used when necessary and
+should be rotated regularly.
+
+```
+Azure Portal → Storage Accounts → [Account Name] →
+  Security + Networking → Access Keys
+
+If an application is using an expired or rotated key:
+  Either update the application's connection string with the new key
+  OR rotate to the other key first to give time for the application update
+```
+
+**SAS (Shared Access Signature) Token Expired:**
+SAS tokens grant time-limited, scoped access to storage. When a SAS token expires,
+the application gets 403.
+
+```
+Symptoms:
+  - Application worked yesterday, failing today with 403
+  - Connection string contains "sig=" parameter (indicates SAS token)
+  - Error: "Signature not valid" or "AuthenticationFailed"
+
+Resolution:
+  Azure Portal → Storage Accounts → [Account] →
+    Security + Networking → Shared Access Signature →
+    Generate a new SAS token with updated expiry date
+    Update the application's connection string/environment variable with the new token
+```
+
+---
