@@ -167,4 +167,47 @@ Results show:
 
 ---
 
+## Procedure E - NSG Flow Logs: Investigating Traffic After the Fact
 
+NSG Flow Logs record every accepted and denied network flow through an NSG. When
+you need to investigate what traffic was occurring before an incident was reported,
+Flow Logs provide the historical data.
+
+**Enable NSG Flow Logs (if not already enabled):**
+```
+Azure Portal → Network Security Groups → [NSG Name] →
+  Monitoring → NSG Flow Logs →
+  Create Flow Log →
+  Version: 2 (includes bytes)
+  Storage account: [create or select]
+  Retention: 7 days (adjust based on cost tolerance)
+  Traffic Analytics: Enable (optional - requires Log Analytics Workspace)
+```
+
+**Query Flow Logs in Log Analytics (if Traffic Analytics enabled):**
+```kql
+// Denied inbound connections to subnet-servers in last 24 hours
+AzureNetworkAnalytics_CL
+| where TimeGenerated > ago(24h)
+    and SubType_s == "FlowLog"
+    and Direction_s == "I"
+    and FlowStatus_s == "D"
+| summarize DeniedCount = count() by
+    NSGRule_s,
+    SrcIP_s,
+    DestPort_d
+| order by DeniedCount desc
+| take 20
+
+// Allowed inbound connections showing top source IPs
+AzureNetworkAnalytics_CL
+| where TimeGenerated > ago(24h)
+    and SubType_s == "FlowLog"
+    and Direction_s == "I"
+    and FlowStatus_s == "A"
+| summarize FlowCount = count() by SrcIP_s, DestPort_d
+| order by FlowCount desc
+| take 20
+```
+
+---
