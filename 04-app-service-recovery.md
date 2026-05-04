@@ -71,3 +71,20 @@ Azure Portal → App Service Plan → Scale Out (App Service Plan)
   Manual scale → Increase instance count
   OR configure Autoscale rules
 ```
+
+### Step 3 - Restart the App Service
+
+A restart clears the application's in-memory state and re-initialises the web worker.
+It is the first-line action for HTTP 502/503 responses when the plan is not at resource limits.
+
+```
+Azure Portal → App Services → [App Name] → Overview → Restart
+```
+
+Wait 2–3 minutes and test the application URL again.
+
+**Restart vs Stop/Start:**
+- **Restart:** Same as stopping and starting the application process - the App Service
+  Plan and underlying host do not change
+- **Stop then Start:** More thorough reset - clears all cached connections, reloads
+  app settings, and can resolve issues that Restart does not
