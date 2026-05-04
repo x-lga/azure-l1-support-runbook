@@ -23,3 +23,22 @@
 
 A 403 AuthorizationFailure or AuthorizationPermissionMismatch error means the
 request reached Azure Storage but was rejected due to insufficient permissions.
+
+### Check 1 - RBAC Assignments
+
+For the application, service principal, or user account trying to access storage:
+```
+Azure Portal → Storage Accounts → [Account Name] →
+  Access Control (IAM) → Role Assignments
+
+Verify the identity has one of:
+  Storage Blob Data Reader    : Read-only access to blob data
+  Storage Blob Data Contributor: Read/write/delete blob data
+  Storage Blob Data Owner     : Full control including setting ACLs
+  Storage Account Contributor : Manage the storage account (not the data)
+```
+
+**Common mistake:** Assigning `Storage Account Contributor` or `Contributor` at
+the resource group level does NOT grant access to read or write blob data.
+These roles manage the storage account configuration, not the data plane.
+For blob data access, you must use the Storage Blob Data roles.
