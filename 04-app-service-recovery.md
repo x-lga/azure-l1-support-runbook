@@ -235,3 +235,41 @@ az webapp config appsettings list \
 ```
 
 ---
+
+## Procedure D - Kudu Console for Advanced Diagnostics
+
+The Kudu service console provides direct access to the App Service sandbox
+environment - the file system, process list, and bash/CMD terminal of the
+application host.
+
+```
+Azure Portal → App Services → [App Name] →
+  Advanced Tools → Go
+
+OR navigate directly to:
+  https://[appname].scm.azurewebsites.net
+```
+
+**What Kudu gives you:**
+- **Debug Console (CMD/Bash):** Command line access to the application directory
+  (`D:\home\site\wwwroot` on Windows, `/home/site/wwwroot` on Linux)
+- **Process Explorer:** List of running processes within the App Service sandbox
+- **Log Files:** Access to `D:\home\LogFiles` containing IIS logs, application logs,
+  and event logs
+- **Deployment history:** All previous deployments with timestamps
+
+**Common Kudu diagnostic steps:**
+```bash
+# Check if the application files are present and recently updated
+ls -la /home/site/wwwroot/
+
+# View the most recent application error log
+cat /home/LogFiles/Application/diagnostics.txt
+
+# Check the current environment variables
+env | grep -i database
+env | grep -i connection
+```
+
+
+---
