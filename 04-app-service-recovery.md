@@ -184,3 +184,19 @@ Azure Portal → App Services → [App Name] →
   SSL state: Secure / Not Secure
   If Not Secure: check that the certificate thumbprint is bound to the domain
 ```
+
+### Custom Domain Not Resolving
+
+```
+Azure Portal → App Services → [App Name] →
+  Custom Domains → Validate
+
+This tells you whether the DNS records (CNAME or A record) are correctly
+pointing to the App Service. If validation fails:
+
+1. Check the DNS records at your domain registrar or DNS provider
+2. CNAME record should point to: [appname].azurewebsites.net
+3. Allow up to 24 hours for DNS propagation globally
+```
+
+---
