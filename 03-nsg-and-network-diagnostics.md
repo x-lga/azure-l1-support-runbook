@@ -91,3 +91,46 @@ And for outbound:
 - `DenyAllOutBound` (priority 65500) - denies all other outbound traffic
 
 ---
+
+## Procedure C - Add or Modify NSG Rules
+
+When IP Flow Verify confirms an NSG is blocking required traffic, update the rule.
+
+**Always follow these steps before modifying an NSG rule:**
+1. Confirm the change is authorised (log a Change ticket)
+2. Document the current state (screenshot the existing rules)
+3. Make the change
+4. Verify with IP Flow Verify that the result changed as expected
+5. Document the change made in the ticket
+
+**Add an inbound allow rule:**
+```
+Azure Portal → Network Security Groups → [NSG Name] →
+  Inbound Security Rules → + Add
+
+  Source               : [IP Addresses / Service Tag / Any]
+  Source IP ranges     : [specific IP or CIDR if IP Addresses selected]
+  Source port ranges   : * (leave as wildcard for source port)
+  Destination          : Any (or specific IP)
+  Service              : [Custom, or select from predefined like RDP, SSH, HTTPS]
+  Destination port     : [e.g., 443]
+  Protocol             : TCP
+  Action               : Allow
+  Priority             : [choose a number not already in use - lower = higher priority]
+  Name                 : [descriptive name - e.g., Allow-HTTPS-CorpNetwork]
+  Description          : [optional but recommended for change history]
+```
+
+**Priority guidance:**
+- Use priority 100-999 for explicit allow rules
+- Use priority 1000-3999 for explicit deny rules
+- Use priority 4000-4096 for catch-all deny rules
+- Leave gaps between priorities (e.g., 100, 200, 300) so new rules can be inserted
+- Do not use priorities 65000-65500 - these are reserved for Azure default rules
+
+---
+
+
+
+
+
