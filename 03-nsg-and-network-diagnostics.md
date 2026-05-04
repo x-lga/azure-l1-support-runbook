@@ -211,3 +211,49 @@ AzureNetworkAnalytics_CL
 ```
 
 ---
+
+## Procedure F - Azure DNS Diagnostics
+
+When resources in a VNet cannot resolve each other by name, or cannot resolve
+external hostnames, the issue is DNS configuration.
+
+**Check what DNS servers are configured on the VNet:**
+```
+Azure Portal → Virtual Networks → [VNet Name] → DNS Servers
+
+Options:
+  Default (Azure-provided)  : Uses Azure DNS 168.63.129.16 - resolves Azure hostnames
+  Custom                    : Uses specified DNS servers (typically on-prem DC for hybrid)
+```
+
+**For hybrid environments:** The VNet should use the on-premises DNS server as the
+custom DNS server so that `contoso.local` hostnames resolve correctly. Azure DNS
+(168.63.129.16) cannot resolve `.local` domains.
+
+**Diagnose from the VM:**
+```powershell
+# On vm-win-server (via Bastion) - test DNS resolution
+# Test Azure internal hostname resolution
+Resolve-DnsName "vm-ubuntu.internal.cloudapp.net"
+
+# Test on-prem hostname resolution (hybrid only)
+Resolve-DnsName "dc01.contoso.local"
+
+# Test external hostname resolution
+Resolve-DnsName "google.com"
+
+# Show configured DNS servers
+Get-DnsClientServerAddress
+```
+
+**Common DNS issues in Azure:**
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Cannot resolve VM names in same VNet | Custom DNS server set that cannot resolve Azure-provided names | Add 168.63.129.16 as a secondary DNS server on the VNet |
+| Cannot resolve on-prem hostnames | VNet using Azure DNS instead of custom on-prem DNS | Set VNet DNS to point to the on-prem DNS server IP |
+| Intermittent resolution failures | Custom DNS server unreachable | Check DNS server VM is running; add 168.63.129.16 as fallback |
+| Resolution works from some VMs, not others | Subnet-level DNS override vs VNet-level | Check whether individual VM NICs have custom DNS overriding the VNet setting |
+
+
+---
