@@ -193,3 +193,45 @@ For Linux persistence, add the mount to `/etc/fstab`:
 ```
 
 ---
+
+## Procedure D - Lifecycle Management and Tier Issues
+
+**Blob shows as Archived - Application Cannot Read It:**
+Archived blobs cannot be read directly. They must be rehydrated to Hot or Cool tier first.
+
+```
+Azure Portal → Storage Accounts → [Account] → Containers →
+  [Container] → [Blob file] → Change Tier →
+  Select: Hot or Cool →
+  Rehydration Priority: Standard (up to 15 hours) or High (within 1 hour, higher cost)
+
+Rehydration is NOT instant. Plan for up to 15 hours for Standard priority.
+```
+
+**Storage Costs Higher Than Expected:**
+```
+Azure Portal → Storage Accounts → [Account] →
+  Storage browser → Blob containers →
+  Check for large blobs that should have been deleted or moved to a lower tier
+
+Azure Portal → Storage Accounts → [Account] →
+  Monitoring → Insights → Overview →
+  Check: Capacity used over time, transactions by tier
+```
+
+Set up Lifecycle Management to automate tier transitions:
+```
+Azure Portal → Storage Accounts → [Account] →
+  Data Management → Lifecycle Management → Add Rule
+
+Example rule:
+  Name: move-to-cool-after-30-days
+  Blob type: Block blobs
+  Conditions:
+    Base blobs: Last modified more than 30 days ago → Move to Cool
+    Base blobs: Last modified more than 90 days ago → Move to Archive
+    Base blobs: Last modified more than 365 days ago → Delete
+```
+
+
+---
