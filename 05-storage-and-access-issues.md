@@ -112,3 +112,33 @@ Resolution:
 
 A 404 BlobNotFound or ContainerNotFound error means the specified resource
 does not exist at the location specified.
+
+### Check the Container and Blob Path
+
+```
+Azure Portal → Storage Accounts → [Account] →
+  Data Storage → Containers
+
+Common causes:
+  - Container name has incorrect capitalisation (container names are lowercase only)
+  - Blob path has trailing or leading slashes that differ from expected
+  - Blob was deleted or moved
+  - Wrong storage account being queried
+```
+
+**Verify the exact blob path:**
+```bash
+# Using Azure CLI — list blobs in a container
+az storage blob list \
+    --container-name mycontainer \
+    --account-name mystorageaccount \
+    --output table
+
+# Check if a specific blob exists
+az storage blob exists \
+    --container-name mycontainer \
+    --name path/to/myfile.pdf \
+    --account-name mystorageaccount
+```
+
+---
