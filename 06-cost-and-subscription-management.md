@@ -175,3 +175,33 @@ Azure Portal → Policy → Definitions →
 ```
 
 ---
+
+## Procedure E - Azure Advisor Recommendations
+
+Azure Advisor analyses your Azure usage and provides prioritised recommendations
+for cost, performance, security, reliability, and operational excellence.
+
+```
+Azure Portal → Advisor
+
+Check each category:
+  Cost          : Identifies underused VMs (low CPU), unattached disks, reserved instance opportunities
+  Security      : Security vulnerabilities and misconfigurations (integrates with Defender for Cloud)
+  Performance   : VM sizing and performance recommendations
+  Reliability   : High availability and redundancy gaps
+  Operational Excellence : Deployment best practices
+```
+
+**Acting on Cost recommendations - rightsize underused VMs:**
+```
+Azure Advisor → Cost → "Right-size or shut down underused virtual machines"
+
+Shows VMs with consistently low CPU utilisation over the past 7–14 days.
+For each recommendation:
+  → View recommended size
+  → If agreed: resize the VM via Portal → VM → Size → Resize
+  → If VM is unused: Stop (Deallocate) or Delete
+```
+
+
+---
