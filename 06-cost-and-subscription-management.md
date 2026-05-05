@@ -142,3 +142,36 @@ Quota increase requests typically take 1–3 business days for approval.
 For urgent production blockers, include "production impact" in the justification.
 
 ---
+
+## Procedure D - Resource Tags for Cost Allocation
+
+Resource tags allow costs to be attributed to departments, projects, or cost centres.
+If a user asks "how much is project X costing us?", resource tags enable this
+filtering in Cost Analysis.
+
+**Add tags to an existing resource:**
+```
+Azure Portal → [Any Resource] → Tags →
+  + Add tag:
+    Name  : Environment | Value : Production
+    Name  : Project     | Value : HybridLabDemo
+    Name  : Owner       | Value : IT-Team
+  → Save
+```
+
+**Query costs by tag in Cost Analysis:**
+```
+Azure Portal → Cost Management → Cost Analysis →
+  Group by: Tag → [Select your tag key, e.g., Project]
+
+This shows cost breakdown by project tag value.
+```
+
+**Enforce tagging with Azure Policy:**
+```
+Azure Portal → Policy → Definitions →
+  Search: "Require a tag" → Assign this policy to the subscription or resource group
+  This prevents resource creation without the specified tags.
+```
+
+---
