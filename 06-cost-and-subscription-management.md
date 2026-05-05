@@ -11,3 +11,21 @@
 
 When a user reports unexpected Azure charges or asks "why is my Azure bill higher
 than expected?", this is the systematic investigation path.
+
+### Step 1 - Open Cost Analysis
+
+```
+Azure Portal → Cost Management + Billing →
+  Cost Management → Cost Analysis
+
+Filter:
+  Scope       : [Your subscription]
+  Granularity : Daily
+  Date range  : Current month or last month
+
+Group by:
+  Service name    : Shows which Azure service is incurring the most cost
+  Resource        : Shows which specific resource is most expensive
+  Resource group  : Shows which resource group is most costly
+  Location        : Shows geographic distribution of cost
+```
