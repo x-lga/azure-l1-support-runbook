@@ -6,3 +6,8 @@
 **Last reviewed:** 2026-07
 
 ---
+
+## Procedure A - Investigating Unexpected Azure Charges
+
+When a user reports unexpected Azure charges or asks "why is my Azure bill higher
+than expected?", this is the systematic investigation path.
