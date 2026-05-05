@@ -73,3 +73,31 @@ Azure Portal → Snapshots
 ```
 
 ---
+
+## Procedure B - Set Up Budget Alerts
+
+Budget alerts notify you before costs exceed a threshold — preventing unexpected
+large bills.
+
+```
+Azure Portal → Cost Management + Billing →
+  Cost Management → Budgets → + Add
+
+  Scope         : [Subscription or Resource Group]
+  Name          : budget-monthly-lab
+  Reset period  : Monthly
+  Budget amount : [e.g., $50 — your expected monthly spend]
+
+  Alert conditions:
+    Alert 1: Actual spend > 80% of budget → email alert@domain.com
+    Alert 2: Actual spend > 100% of budget → email alert@domain.com
+    Alert 3: Forecasted spend > 110% of budget → email alert@domain.com
+
+  → Create
+```
+
+Budget alerts do NOT stop resources from running - they only send notifications.
+To automatically act on budget alerts (stop VMs when budget is exceeded), use
+Azure Automation runbooks or Azure Logic Apps triggered by Cost Management alerts.
+
+---
