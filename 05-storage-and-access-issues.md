@@ -107,3 +107,8 @@ Resolution:
 ```
 
 ---
+
+## Procedure B - Blob Container Cannot Be Found (404 Error)
+
+A 404 BlobNotFound or ContainerNotFound error means the specified resource
+does not exist at the location specified.
