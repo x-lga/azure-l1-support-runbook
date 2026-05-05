@@ -146,3 +146,50 @@ az storage blob exists \
 ## Procedure C - Azure Files Share Cannot Be Mounted
 
 Azure Files provides SMB-based file shares mountable on VMs and on-premises machines.
+
+### Common Mounting Errors
+
+**Error 53 - Network path not found:**
+Port 445 (SMB) is blocked between the machine and Azure Storage.
+
+```powershell
+# Test if port 445 is reachable from the machine
+Test-NetConnection -ComputerName mystorageaccount.file.core.windows.net -Port 445
+
+# If TcpTestSucceeded = False:
+# - Port 445 may be blocked by the corporate firewall
+# - ISP may block port 445 (common for residential ISPs)
+# Fix: Use Azure File Sync to sync a local server, or use SMB over HTTPS (REST)
+```
+
+**Error 13 - Permission denied:**
+The storage account key or identity credentials are incorrect.
+
+```powershell
+# Mount the Azure File Share with explicit credentials
+net use Z: \\mystorageaccount.file.core.windows.net\myshare /user:AZURE\mystorageaccount [AccessKey]
+
+# Or use the mount command from Azure Portal:
+Azure Portal → Storage Accounts → [Account] →
+  File Shares → [Share Name] → Connect →
+  Select OS (Windows/Linux/macOS) →
+  Copy the mount script provided
+```
+
+**Error: Share not accessible after VM restart:**
+The drive mapping was not persisted. Azure File mounts created with `net use` are
+not persistent across restarts unless the `/persistent:yes` flag is used.
+
+```powershell
+net use Z: \\mystorageaccount.file.core.windows.net\myshare [AccessKey] /persistent:yes
+```
+
+For Linux persistence, add the mount to `/etc/fstab`:
+```bash
+# Linux fstab entry for Azure Files
+//mystorageaccount.file.core.windows.net/myshare /mnt/myshare \
+    cifs nofail,credentials=/etc/smbcredentials/mystorageaccount.cred,\
+    serverino,nosharesock,actimeo=30 0 0
+```
+
+---
