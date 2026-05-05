@@ -145,3 +145,52 @@ SecurityEvent
 ```
 
 ---
+
+## Azure Activity Log Queries
+
+```kql
+// ── All operations in the last 7 days by a specific user ────────────────
+AzureActivity
+| where TimeGenerated > ago(7d)
+| where Caller == "admin@contosodemo.onmicrosoft.com"
+| project TimeGenerated, OperationNameValue,
+    ActivityStatusValue, ResourceGroup, _ResourceId
+| order by TimeGenerated desc
+```
+
+```kql
+// ── Resource deletions in the last 7 days ───────────────────────────────
+AzureActivity
+| where TimeGenerated > ago(7d)
+| where OperationNameValue endswith "delete"
+    and ActivityStatusValue == "Success"
+| project TimeGenerated, Caller, OperationNameValue,
+    ResourceGroup, _ResourceId
+| order by TimeGenerated desc
+```
+
+```kql
+// ── NSG rule changes in the last 7 days ─────────────────────────────────
+AzureActivity
+| where TimeGenerated > ago(7d)
+| where OperationNameValue has "networkSecurityGroups"
+    and ActivityStatusValue == "Success"
+| project TimeGenerated, Caller, OperationNameValue, Properties
+| order by TimeGenerated desc
+```
+
+```kql
+// ── VM start and stop operations ────────────────────────────────────────
+AzureActivity
+| where TimeGenerated > ago(7d)
+| where OperationNameValue in (
+    "Microsoft.Compute/virtualMachines/start/action",
+    "Microsoft.Compute/virtualMachines/deallocate/action",
+    "Microsoft.Compute/virtualMachines/restart/action"
+  )
+| project TimeGenerated, Caller, OperationNameValue,
+    ActivityStatusValue, _ResourceId
+| order by TimeGenerated desc
+```
+
+---
