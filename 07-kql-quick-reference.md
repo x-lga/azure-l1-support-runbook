@@ -302,3 +302,48 @@ StorageBlobLogs
 ```
 
 ---
+
+## Useful KQL Operators and Functions
+
+```kql
+// Time filters
+| where TimeGenerated > ago(1h)                    // Last hour
+| where TimeGenerated > ago(24h)                   // Last 24 hours
+| where TimeGenerated > ago(7d)                    // Last 7 days
+| where TimeGenerated between (ago(7d) .. ago(1d)) // 7 to 1 day ago
+
+// Aggregation
+| summarize count() by FieldName                   // Count grouped by field
+| summarize avg(CounterValue) by Computer          // Average grouped by Computer
+| summarize max(CounterValue) by bin(TimeGenerated, 5m) // Max per 5-minute bucket
+
+// Filtering
+| where FieldName == "exact value"                 // Exact match
+| where FieldName contains "partial"               // Contains (case-insensitive)
+| where FieldName startswith "prefix"              // Starts with
+| where FieldName endswith "suffix"                // Ends with
+| where FieldName has "word"                       // Has (word-boundary match)
+| where FieldName in ("a", "b", "c")               // In list
+| where FieldName !in ("x", "y")                   // Not in list
+| where isnotnull(FieldName)                       // Field is not null
+
+// Projection and renaming
+| project Field1, Field2, Field3                   // Select specific fields
+| project-away FieldToRemove                       // Remove a field
+| extend NewField = expression                     // Add a computed field
+
+// Sorting and limiting
+| order by FieldName desc                          // Sort descending
+| sort by FieldName asc                            // Sort ascending
+| take 50                                          // Return first 50 rows
+| top 10 by CountValue desc                        // Return top 10 by value
+
+// Rendering
+| render timechart                                 // Line chart over time
+| render barchart                                  // Bar chart
+| render piechart                                  // Pie chart
+| render table                                     // Tabular view (default)
+```
+
+
+---
