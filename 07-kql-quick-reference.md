@@ -276,3 +276,29 @@ AppServicePlatformLogs
 ```
 
 ---
+
+## Storage Account Queries
+
+```kql
+// ── Storage account authentication failures ──────────────────────────────
+StorageBlobLogs
+| where TimeGenerated > ago(24h)
+| where StatusCode in (403, 401)
+| summarize FailureCount = count()
+    by CallerIpAddress, AuthenticationType, StatusText,
+    bin(TimeGenerated, 1h)
+| order by FailureCount desc
+```
+
+```kql
+// ── Large blob read operations (potential data exfiltration indicator) ────
+StorageBlobLogs
+| where TimeGenerated > ago(24h)
+| where OperationName == "GetBlob"
+| where ResponseBodySize > 104857600  // > 100 MB
+| project TimeGenerated, CallerIpAddress,
+    Uri, ResponseBodySize, AuthenticationType
+| order by ResponseBodySize desc
+```
+
+---
