@@ -242,3 +242,37 @@ SigninLogs
 ```
 
 ---
+
+## App Service Queries
+
+```kql
+// ── HTTP 5xx errors in the last 1 hour ──────────────────────────────────
+AppServiceHTTPLogs
+| where TimeGenerated > ago(1h)
+| where ScStatus >= 500
+| summarize ErrorCount = count()
+    by ScStatus, CsUriStem, bin(TimeGenerated, 5m)
+| order by ErrorCount desc
+```
+
+```kql
+// ── App Service response time — identify slow requests ──────────────────
+AppServiceHTTPLogs
+| where TimeGenerated > ago(1h)
+| where TimeTaken > 3000
+| project TimeGenerated, CsMethod, CsUriStem,
+    ScStatus, TimeTaken, CIp
+| order by TimeTaken desc
+| take 50
+```
+
+```kql
+// ── App Service restart history ─────────────────────────────────────────
+AppServicePlatformLogs
+| where TimeGenerated > ago(7d)
+| where OperationName == "Restart"
+| project TimeGenerated, OperationName, Level, Message
+| order by TimeGenerated desc
+```
+
+---
