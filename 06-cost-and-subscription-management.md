@@ -43,3 +43,33 @@ Sort by cost descending. Common high-cost resources:
 | Azure Monitor / Log Analytics | High data ingestion | Review what is being forwarded to Log Analytics; set data caps |
 | Load Balancer | Unnecessary data processing rules | Review and remove unused rules |
 | Public IP Addresses | Idle public IPs (even unattached IPs incur charges) | Delete unattached public IPs |
+
+
+### Step 3 - Check for Orphaned Resources
+
+Orphaned resources are Azure resources that continue to incur charges even though
+they are no longer needed - typically created as dependencies that were not deleted
+when the primary resource was removed.
+
+Common orphaned resources:
+```
+Azure Portal → Virtual Networks → [VNet] → Connected Devices
+  → Look for NICs not attached to any VM (NIC without an associated VM)
+
+Azure Portal → Public IP Addresses
+  → Filter: Status = Unassociated
+  → Delete all unassociated public IPs
+
+Azure Portal → Managed Disks
+  → Filter: Disk State = Unattached
+  → Review and delete unneeded unattached disks (these are billed at full rate)
+
+Azure Portal → Network Security Groups
+  → Check for NSGs not associated with any subnet or NIC
+
+Azure Portal → Snapshots
+  → Disk snapshots accumulate and are rarely cleaned up automatically
+  → Review and delete old snapshots
+```
+
+---
