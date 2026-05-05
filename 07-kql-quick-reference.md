@@ -194,3 +194,51 @@ AzureActivity
 ```
 
 ---
+
+## Entra ID Sign-In Queries
+
+```kql
+// ── Failed sign-ins — last 24 hours ─────────────────────────────────────
+SigninLogs
+| where TimeGenerated > ago(24h)
+| where ResultType != 0
+| summarize FailureCount = count()
+    by UserPrincipalName, ResultDescription, IPAddress,
+    AppDisplayName
+| order by FailureCount desc
+```
+
+```kql
+// ── Sign-ins blocked by Conditional Access ───────────────────────────────
+SigninLogs
+| where TimeGenerated > ago(24h)
+| where ResultType == 53003
+| project TimeGenerated, UserPrincipalName,
+    IPAddress, AppDisplayName,
+    ConditionalAccessStatus,
+    tostring(ConditionalAccessPolicies)
+| order by TimeGenerated desc
+```
+
+```kql
+// ── Sign-ins from new countries compared to last 30 days ─────────────────
+// First run: get baseline countries
+let baseline = SigninLogs
+| where TimeGenerated between (ago(37d) .. ago(7d))
+| where ResultType == 0
+| summarize BaselineCountries = make_set(
+    tostring(LocationDetails.countryOrRegion))
+    by UserPrincipalName;
+// Then find sign-ins from countries not in baseline
+SigninLogs
+| where TimeGenerated > ago(7d)
+| where ResultType == 0
+| extend Country = tostring(LocationDetails.countryOrRegion)
+| join kind=leftouter baseline on UserPrincipalName
+| where not(Country in (BaselineCountries))
+| project TimeGenerated, UserPrincipalName, Country,
+    IPAddress, AppDisplayName
+| order by TimeGenerated desc
+```
+
+---
