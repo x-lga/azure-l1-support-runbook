@@ -142,3 +142,7 @@ az storage blob exists \
 ```
 
 ---
+
+## Procedure C - Azure Files Share Cannot Be Mounted
+
+Azure Files provides SMB-based file shares mountable on VMs and on-premises machines.
