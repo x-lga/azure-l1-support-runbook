@@ -29,3 +29,17 @@ Group by:
   Resource group  : Shows which resource group is most costly
   Location        : Shows geographic distribution of cost
 ```
+
+### Step 2 - Identify the Top Cost Drivers
+
+Sort by cost descending. Common high-cost resources:
+
+| Resource Type | Common Cost Driver | Mitigation |
+|-------------|-------------------|-----------|
+| Virtual Machines | Running 24/7 when only needed 8/5 | Configure auto-shutdown schedule |
+| Azure Bastion | Running continuously | Stop Bastion when not in use; auto-shutdown |
+| Azure SQL Database | Incorrect tier | Downsize if DTUs/vCores are consistently low |
+| Bandwidth / Data Transfer | Large outbound data transfer | Investigate what data is being transferred and to where |
+| Azure Monitor / Log Analytics | High data ingestion | Review what is being forwarded to Log Analytics; set data caps |
+| Load Balancer | Unnecessary data processing rules | Review and remove unused rules |
+| Public IP Addresses | Idle public IPs (even unattached IPs incur charges) | Delete unattached public IPs |
