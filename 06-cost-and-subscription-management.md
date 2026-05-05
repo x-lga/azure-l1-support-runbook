@@ -101,3 +101,44 @@ To automatically act on budget alerts (stop VMs when budget is exceeded), use
 Azure Automation runbooks or Azure Logic Apps triggered by Cost Management alerts.
 
 ---
+
+## Procedure C - Understanding and Managing Quotas
+
+Azure subscriptions have limits (quotas) on the number of certain resources that
+can be created. When these limits are reached, deployments fail.
+
+**Check current quota usage:**
+```
+Azure Portal → Subscriptions → [Your Subscription] →
+  Usage + Quotas
+
+Filter by:
+  Provider   : Microsoft.Compute (for VMs)
+  Location   : [your region]
+
+Shows:
+  Cores used vs total cores available
+  VMs deployed vs quota
+  Public IPs used vs quota
+```
+
+**Common quota errors:**
+
+| Error | Meaning | Resolution |
+|-------|---------|-----------|
+| `QuotaExceeded` for VM cores | Subscription has reached vCPU limit | Delete unused VMs, or request quota increase |
+| `OperationNotAllowed` - too many resource groups | Resource group quota reached | Delete unused resource groups |
+| Public IP limit reached | Too many public IPs in the subscription | Delete unattached public IPs |
+
+**Request a quota increase:**
+```
+Azure Portal → Subscriptions → [Subscription] →
+  Usage + Quotas → [Select quota you need increased] →
+  Request Increase →
+  Fill in the form with justification and requested new limit
+```
+
+Quota increase requests typically take 1–3 business days for approval.
+For urgent production blockers, include "production impact" in the justification.
+
+---
