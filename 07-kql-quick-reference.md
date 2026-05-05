@@ -88,3 +88,60 @@ Perf
 ```
 
 ---
+
+## Security and Authentication Queries
+
+```kql
+// ── Failed Windows login attempts (EventID 4625) - last 24 hours ────────
+SecurityEvent
+| where TimeGenerated > ago(24h)
+| where EventID == 4625
+| summarize FailureCount = count()
+    by Account, IpAddress, Computer,
+    bin(TimeGenerated, 1h)
+| order by FailureCount desc
+```
+
+```kql
+// ── Successful logins outside business hours ─────────────────────────────
+SecurityEvent
+| where TimeGenerated > ago(7d)
+| where EventID == 4624
+| extend Hour = hourofday(TimeGenerated)
+| where Hour < 7 or Hour > 19
+| summarize Count = count()
+    by Account, IpAddress, Computer, Hour
+| order by Count desc
+```
+
+```kql
+// ── Account lockouts (EventID 4740) ─────────────────────────────────────
+SecurityEvent
+| where TimeGenerated > ago(24h)
+| where EventID == 4740
+| project TimeGenerated, TargetAccount, Computer, SubjectUserName
+| order by TimeGenerated desc
+```
+
+```kql
+// ── New user account created (EventID 4720) ─────────────────────────────
+SecurityEvent
+| where TimeGenerated > ago(7d)
+| where EventID == 4720
+| project TimeGenerated, TargetUserName,
+    SubjectUserName, Computer
+| order by TimeGenerated desc
+```
+
+```kql
+// ── Privilege escalation — special logon (EventID 4672) ──────────────────
+SecurityEvent
+| where TimeGenerated > ago(24h)
+| where EventID == 4672
+| project TimeGenerated, Account, PrivilegeList, Computer
+| where PrivilegeList has "SeDebugPrivilege"
+    or PrivilegeList has "SeTakeOwnershipPrivilege"
+| order by TimeGenerated desc
+```
+
+---
