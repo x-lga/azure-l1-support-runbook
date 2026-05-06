@@ -70,3 +70,30 @@ Azure Portal → [Resource] → Activity Log →
 | Bad Gateway | 502 | App Service received an invalid response from a downstream dependency | Check application logs. Often a database connection failure or downstream API unavailability. |
 
 ---
+
+## How to Check azure.status.microsoft.com
+
+When multiple users are affected or the error code suggests a platform issue
+(InternalServerError, GatewayTimeout at scale), check Azure's own status page
+before spending time on individual resource troubleshooting:
+
+```
+1. Navigate to: https://azure.status.microsoft.com
+2. Select the affected region (e.g., UK South, East US)
+3. Look for active incidents in the relevant service category (Compute, Networking, Storage)
+4. If an active incident exists:
+   - Document the incident ID
+   - Do not escalate to L2 - this is Azure's problem, not yours
+   - Set a reminder to check back in 30 minutes
+   - Communicate to the affected user that an Azure platform incident is in progress
+5. If no incident exists: the issue is specific to your resources - continue triage
+```
+
+For subscription-specific alerts about your resources:
+```
+Azure Portal → Service Health → Health Alerts
+```
+This shows service health events that are specifically affecting your subscription.
+
+
+---
