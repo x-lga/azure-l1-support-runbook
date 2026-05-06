@@ -29,3 +29,14 @@ Azure Portal → [Resource] → Activity Log →
 | `InternalServerError` | An unexpected Azure platform error | Azure-side failure - transient in most cases | Wait 5 minutes and retry. Check azure.status.microsoft.com for platform incidents. If persistent > 30 minutes, escalate. |
 
 ---
+
+## Networking Errors
+
+| Error Code | Plain Language | Root Cause | L1 Action |
+|-----------|---------------|-----------|-----------|
+| `AuthorizationFailed` | Access denied - RBAC permissions insufficient | The account attempting the action does not have the required role at the required scope | Check RBAC role assignments for the account. Confirm the role has the required action permission. For example, `Contributor` cannot assign roles - `Owner` or `User Access Administrator` is needed. |
+| `SubnetIsFull` | No IP addresses available in the subnet | The subnet's address range is exhausted - all IPs are assigned | Add a new subnet to the VNet with an available address range and move resources to the new subnet, or expand the existing subnet if the VNet address space allows. |
+| `VnetAddressSpaceConflict` | VNet address ranges overlap | Attempting to create a VNet or subnet with an address range already in use | Choose a non-overlapping CIDR range. Common issue with VNet peering - peered VNets cannot have overlapping address spaces. |
+| `InvalidAddressPrefix` | The IP address range is not valid | CIDR notation is incorrect (e.g., 10.0.0.0/33 - /33 does not exist) | Correct the CIDR notation. Valid subnet masks are /0 through /32 for IPv4. |
+
+---
