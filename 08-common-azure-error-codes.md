@@ -50,3 +50,13 @@ Azure Portal → [Resource] → Activity Log →
 | `InvalidAuthenticationTokenTenant` | Token is from the wrong Azure AD tenant | The user is authenticated to a different tenant than the one containing the resource | Sign out and sign in again ensuring the correct tenant is selected. In Portal, check the tenant switcher (top right). |
 
 ---
+
+## Storage Errors
+
+| Error Code | Plain Language | Root Cause | L1 Action |
+|-----------|---------------|-----------|-----------|
+| `StorageAccountAlreadyExists` | Storage account name is already taken globally | Storage account names must be globally unique across all Azure | Choose a different name - add unique characters (date, random suffix). Storage account names must be 3–24 characters, lowercase letters and numbers only. |
+| `BlobAccessTierNotSupported` | Blob tier change is not supported for this blob type | Archive rehydration attempted on a blob that does not support this | Verify the blob type. Archive tier is only supported for Block blobs, not Append or Page blobs. |
+| `AuthenticationFailed` | Storage authentication failed | Access key is incorrect, SAS token is expired, or Entra ID token lacks permission | Check the access key (Storage Account → Access Keys). Check SAS token expiry. Check RBAC - Storage Blob Data Contributor is required for data plane operations. |
+
+---
