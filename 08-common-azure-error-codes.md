@@ -40,3 +40,13 @@ Azure Portal → [Resource] → Activity Log →
 | `InvalidAddressPrefix` | The IP address range is not valid | CIDR notation is incorrect (e.g., 10.0.0.0/33 - /33 does not exist) | Correct the CIDR notation. Valid subnet masks are /0 through /32 for IPv4. |
 
 ---
+
+## Identity and Access Errors
+
+| Error Code | Plain Language | Root Cause | L1 Action |
+|-----------|---------------|-----------|-----------|
+| `RoleAssignmentUpdateNotPermitted` | Cannot update an existing role assignment | Attempting to update a role assignment in place instead of deleting and recreating | Delete the existing role assignment and create a new one with the updated role or scope. |
+| `PrincipalNotFound` | The user, group, or service principal does not exist | Wrong object ID, deleted account, or wrong tenant | Verify the object ID in Entra ID. Check whether the account was recently deleted (Entra ID → Deleted Users - 30-day recovery window). |
+| `InvalidAuthenticationTokenTenant` | Token is from the wrong Azure AD tenant | The user is authenticated to a different tenant than the one containing the resource | Sign out and sign in again ensuring the correct tenant is selected. In Portal, check the tenant switcher (top right). |
+
+---
