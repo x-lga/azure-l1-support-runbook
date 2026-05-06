@@ -60,3 +60,13 @@ Azure Portal → [Resource] → Activity Log →
 | `AuthenticationFailed` | Storage authentication failed | Access key is incorrect, SAS token is expired, or Entra ID token lacks permission | Check the access key (Storage Account → Access Keys). Check SAS token expiry. Check RBAC - Storage Blob Data Contributor is required for data plane operations. |
 
 ---
+
+## App Service Errors
+
+| Error Code | HTTP Code | Plain Language | L1 Action |
+|-----------|----------|---------------|-----------|
+| Gateway Timeout | 504 | App Service is not responding within the timeout | Restart the App Service. Check App Service Plan CPU/Memory - may need scale up. Check application logs for long-running operations. |
+| Service Unavailable | 503 | App Service is temporarily unavailable | Check App Service Plan health. May be at resource limit or in the process of scaling. Wait 2–3 minutes and retry. Restart if persistent. |
+| Bad Gateway | 502 | App Service received an invalid response from a downstream dependency | Check application logs. Often a database connection failure or downstream API unavailability. |
+
+---
